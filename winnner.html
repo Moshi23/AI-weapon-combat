@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Game Over</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body class="winner-page">
+
+    {% if "PLAYER" in result %}
+
+        <h1 class="winner-title">
+            GALAXY SAVED
+        </h1>
+
+    {% elif "AI" in result %}
+
+        <h1 class="winner-title">
+            ALIEN DOMINATION
+        </h1>
+
+    {% else %}
+
+        <h1 class="winner-title">
+            GALACTIC DRAW
+        </h1>
+
+    {% endif %}
+
+    <h2>
+        PLAYER HP : {{ player_health }}
+    </h2>
+
+    <h2>
+        AI HP : {{ ai_health }}
+    </h2>
+
+    {% if "PLAYER" in result %}
+
+        <h3>
+            The galaxy is safe once again.
+        </h3>
+
+    {% elif "AI" in result %}
+
+        <h3>
+            The AI has conquered the galaxy.
+        </h3>
+
+    {% else %}
+
+        <h3>
+            Both forces remain evenly matched.
+        </h3>
+
+    {% endif %}
+
+    <br>
+
+    <a href="/reset">
+
+        <button class="menu-btn">
+            PLAY AGAIN
+        </button>
+
+    </a>
+
+</body>
+
+</html>
