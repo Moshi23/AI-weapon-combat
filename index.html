@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+```
+<title>Space Arena</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+```
+
+</head>
+
+<body>
+
+```
+<h1 class="game-title">
+    SPACE ARENA
+</h1>
+
+<p class="round-text">
+    ROUND {{ round_count }} / {{ max_rounds }}
+</p>
+
+<div class="battlefield">
+
+    <div class="health-container">
+
+        <div class="health-box">
+            <h3>PLAYER</h3>
+
+            <div class="health-bar">
+                <div class="health-fill"
+                     style="width: {{ player_health }}%;">
+                </div>
+            </div>
+
+            <p>HP : {{ player_health }}</p>
+        </div>
+
+        <div class="health-box">
+            <h3>AI</h3>
+
+            <div class="health-bar">
+                <div class="health-fill"
+                     style="width: {{ ai_health }}%;">
+                </div>
+            </div>
+
+            <p>HP : {{ ai_health }}</p>
+        </div>
+
+    </div>
+
+    <div class="arena">
+
+        <img src="{{ url_for('static', filename='images/player_side.png.png') }}"
+             class="ship player-ship"
+             onclick="openWeapons()">
+
+        <img src="{{ url_for('static', filename='images/ai_user.png.png') }}"
+             class="ship ai-ship">
+
+    </div>
+
+</div>
+
+<div id="weaponPanel">
+
+    <button class="close-btn"
+            onclick="closeWeapons()">
+        ✕
+    </button>
+
+    <div class="weapon-grid">
+
+    <form action="/play/starbreaker"
+          onsubmit="event.preventDefault(); playAnimation(this);">
+        <button class="weapon-btn">
+            ☄️
+            <span>NOVA</span>
+        </button>
+    </form>
+
+    <form action="/play/nebula_slash"
+          onsubmit="event.preventDefault(); playAnimation(this);">
+        <button class="weapon-btn">
+            ⚔️
+            <span>NEXUS</span>
+        </button>
+    </form>
+
+    <form action="/play/starfall_missile"
+          onsubmit="event.preventDefault(); playAnimation(this);">
+        <button class="weapon-btn">
+            🚀
+            <span>STRIKE</span>
+        </button>
+    </form>
+
+    <form action="/play/solar_burst"
+          onsubmit="event.preventDefault(); playAnimation(this);">
+        <button class="weapon-btn">
+            🔥
+            <span>BLAZE</span>
+        </button>
+    </form>
+
+    <form action="/play/void_reaper"
+          onsubmit="event.preventDefault(); playAnimation(this);">
+        <button class="weapon-btn">
+            ⚡
+            <span>VOID</span>
+        </button>
+    </form>
+
+    <form action="/play/eclipse_cannon"
+          onsubmit="event.preventDefault(); playAnimation(this);">
+        <button class="weapon-btn">
+            🌌
+            <span>ECLIPSE</span>
+        </button>
+    </form>
+
+</div>
+
+</div>
+
+<div id="battleAnimation"></div>
+
+{% if player_weapon_name %}
+
+<div class="combat-log">
+
+    <h3>COMBAT LOG</h3>
+
+    <p>
+        YOUR WEAPON :
+        {{ player_weapon_name }}
+    </p>
+
+    <p>
+        AI WEAPON :
+        {{ ai_weapon_name }}
+    </p>
+
+</div>
+
+{% endif %}
+
+<script src="{{ url_for('static', filename='battle.js') }}"></script>
+```
+<div id="battleOverlay">
+
+    <h2 id="timer">TIME : 15</h2>
+
+
+    <button id="fightBtn">
+        TAP TO ATTACK
+    </button>
+
+</div>
+
+<div id="tapBattle">
+
+    <button id="tapBtn">
+        CHARGE
+    </button>
+
+
+</div>
+
+</body>
+
+</html>
